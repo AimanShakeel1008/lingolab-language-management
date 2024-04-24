@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/contents")
+@RequestMapping("/api/languages")
 public class LanguageContentController {
     @Autowired
     private LanguageContentService languageContentService;
 
-    @GetMapping("/language/{languageId}")
+    @GetMapping("/contents/language/{languageId}")
     public ResponseEntity<List<LanguageContent>> getAllContentsForLanguage(@PathVariable Long languageId) {
         List<LanguageContent> contents = languageContentService.findAllByLanguageId(languageId);
         if (contents.isEmpty()) {
@@ -24,14 +24,14 @@ public class LanguageContentController {
     }
 
     // GET endpoint to retrieve a specific content by ID
-    @GetMapping("/{id}")
+    @GetMapping("/contents/{id}")
     public ResponseEntity<LanguageContent> getContentById(@PathVariable Long id) {
         return languageContentService.getContentById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/contents")
     public ResponseEntity<LanguageContent> createContent(@RequestBody LanguageContent content) {
         return ResponseEntity.ok(languageContentService.addContentToLanguage(content));
     }
