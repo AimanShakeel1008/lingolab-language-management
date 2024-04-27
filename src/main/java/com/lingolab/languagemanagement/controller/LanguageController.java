@@ -1,5 +1,6 @@
 package com.lingolab.languagemanagement.controller;
 
+import com.lingolab.languagemanagement.model.Country;
 import com.lingolab.languagemanagement.model.Language;
 import com.lingolab.languagemanagement.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class LanguageController {
     public ResponseEntity<List<Language>> getAllLanguages() {
         List<Language> languages = languageService.getAllLanguages();
         return ResponseEntity.ok(languages);
+    }
+
+    @GetMapping("/countries")
+    public ResponseEntity<List<Country>> getAllCountries() {
+        List<Country> countries = languageService.getAllCountries();
+        return ResponseEntity.ok(countries);
     }
 
     // GET endpoint to retrieve a language by ID
